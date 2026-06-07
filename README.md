@@ -1,46 +1,43 @@
-# Resume, versioned with LinkRight
+# Resume, versioned by LinkRight
 
-This repository hosts a versioned, publicly accessible resume published via [LinkRight](https://github.com/satvik-jain-iitd/linkright-skills).
+This repo hosts my live resume, one version per application, all generated and published by [LinkRight](https://github.com/satvik-jain-iitd/linkright-skills), the career OS I built.
 
-The default format is LaTeX, compiled to PDF automatically by GitHub Actions. HTML is optional.
+Nothing here is written by hand. Each resume is tailored to a specific job description by the LinkRight pipeline, which guarantees it never invents a metric, then published here automatically. The default format is LaTeX compiled to PDF; HTML is optional.
 
 ## How it works
 
-Every time `/linkright-push` runs, it:
+`/linkright-push` does the publishing. On each run it:
 
-1. Writes the tailored resume as a `.tex` file (LaTeX, the default), or as HTML if you chose that path.
-2. For LaTeX, also writes a tiny `index.html` that redirects to the compiled `resume.pdf`.
-3. Commits with a tag, `<company>-<role>-<date>`, and pushes to this repo.
-4. On push, the GitHub Action compiles every `.tex` to PDF with XeLaTeX and commits the PDF back. GitHub Pages then serves it.
+1. Writes the tailored resume as a `.tex` file (LaTeX, the default), or HTML if that path was chosen.
+2. For LaTeX, also writes a small `index.html` that redirects to the compiled `resume.pdf`.
+3. Commits with the tag `<company>-<role>-<date>` and pushes here.
+4. On push, a GitHub Action compiles every `.tex` to PDF with XeLaTeX and commits the PDF back. GitHub Pages serves it.
 
-You do not need LaTeX installed locally. The Action does the compile in the cloud.
+No local LaTeX install needed. The compile runs in the cloud, in the Action.
 
 ## One-time setup
 
-Enable Pages once, Settings, Pages, Build and deployment, Deploy from a branch, pick `main` and the root folder. After that, pushing a `.tex` produces a `.pdf` next to it automatically.
+Enable Pages once: Settings, Pages, Build and deployment, Deploy from a branch, pick `main` and the root folder. After that, pushing a `.tex` produces a `.pdf` next to it automatically.
 
 ## Structure
 
 ```
-/                          ← latest resume: resume.tex + resume.pdf + index.html redirect
+/                         # latest resume: resume.tex + resume.pdf + index.html redirect
 /roles/
-  └── <company>-<role>/   ← version tailored for a specific application
-        ├── resume.tex
-        ├── resume.pdf     ← built by the Action
-        └── index.html
+  <company>-<role>/       # a version tailored for one application
+        resume.tex
+        resume.pdf        # built by the Action
+        index.html
 ```
 
 ## Live URL
 
-`https://<your-github-username>.github.io/linkright-resume/`
+`https://<github-username>.github.io/linkright-resume/`
 
-Role-specific version:
-`https://<your-github-username>.github.io/linkright-resume/roles/<company>-<role>/`
+Role-specific version: `https://<github-username>.github.io/linkright-resume/roles/<company>-<role>/`
 
-## Managed by
+## Managed by the system
 
-[`/linkright-push`](https://github.com/satvik-jain-iitd/linkright-skills), do not edit files here directly. All changes flow from `/linkright-sync` to `/linkright-push`. The only thing that runs in this repo is the compile workflow at `.github/workflows/compile.yml`.
+Do not edit files here directly. Everything flows from `/linkright-sync` to `/linkright-push`. The only thing that runs in this repo is the compile workflow at `.github/workflows/compile.yml`.
 
----
-
-*Part of the [LinkRight](https://github.com/satvik-jain-iitd/linkright-skills) AI career OS.*
+Part of [LinkRight](https://github.com/satvik-jain-iitd/linkright-skills), a local-first career OS.
